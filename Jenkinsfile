@@ -2,9 +2,9 @@ pipeline {
   agent any
 
   triggers {
-    scm {
+    scm (
       branches '**'
-    }
+    )
   }
 
   stages {
