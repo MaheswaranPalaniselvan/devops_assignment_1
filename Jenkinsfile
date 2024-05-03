@@ -1,11 +1,6 @@
 pipeline {
   agent any
 
-  triggers {
-    scm (
-      branches '**'
-    )
-  }
 
   stages {
     stage('Checkout Code') {
