@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Build and Compile') {
       steps {
-        cmd /c "mvn clean compile"
+        sh "mvn clean compile"
       }
       post {
         success {
