@@ -10,19 +10,25 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                script {
-                    git branch: 'master', 
-                       credentialsId: '8b8a4dfa-903d-4d7f-8969-f27da7513442', 
-                       url: 'https://github.com/MaheswaranPalaniselvan/devops_assignment_1.git' 
-                }
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/main']], name
+                    userRemoteConfigs: [[url: 'https:// https://github.com/MaheswaranPalaniselvan/devops_assignment_1.git ']]])
+                    }
             }
         }
         stage('Build and Compile') {
             steps {
-                script {
-                    sh 'make clean && make all'
-                }
+                sh 'make clean && make all'
+                
             }
+            post {
+                success {
+                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+                    }
+                failure {
+                    echo 'Build failed! Please check the build logs.'
+                    }
+                }
         }
     }
 }
